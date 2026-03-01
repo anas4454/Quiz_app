@@ -9,7 +9,7 @@
 
     <p>Your quiz has been completed successfully.</p>
 
-    <h3>Your Score: {{ $score }} / {{ $total }}</h3>
+    <h3>Your Score: {{ $score }} / {{ $totalQuestion }}</h3>
 
     <p>Keep learning and improving 🚀</p>
 

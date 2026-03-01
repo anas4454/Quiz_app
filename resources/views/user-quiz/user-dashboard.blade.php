@@ -3,7 +3,7 @@
 
     <div class="container mt-5">
 
-        <h2 class="mb-4">Welcome Back, {{Auth::user()->name  }} 👋</h2>
+        <h2 class="mb-4">Welcome Back, {{auth()::user()->name  }} 👋</h2>
 
         <div class="row g-4">
             <div class="col-md-4">

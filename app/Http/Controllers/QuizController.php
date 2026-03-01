@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Test;
 use App\Models\Option;
 use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class QuizController extends Controller
 {
@@ -14,7 +17,7 @@ class QuizController extends Controller
     {
 
         $quiz = Quiz::all();
-
+        $user = auth()->name();
         // dd($quiz);
 
         return view('user-quiz.user-dashboard', compact('quiz'));
@@ -56,6 +59,7 @@ class QuizController extends Controller
 
         $totalQuestion = $quiz->questions()->count();
 
+        Mail::to(Auth::user()->email)->send(new Test('score' , 'totalQuestion'));
 
 
         return view('user-quiz.result', compact('score' , 'totalQuestion'));
