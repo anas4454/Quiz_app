@@ -1,136 +1,87 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Admin Dashboard - HiStudy</title>
+<x-dashboard.main>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-body{
-    font-family:'Poppins',sans-serif;
-    background: linear-gradient(135deg,#F8FAFF,#EEF2FF);
-}
+    <!-- Main Content -->
+    <div class="main-content">
 
-/* Sidebar */
-.sidebar{
-    height:100vh;
-    background:#1E3A8A;
-    padding:30px 20px;
-    position:fixed;
-    width:240px;
-}
+        <div class="admin-header d-flex align-items-center justify-content-between mb-5"
+            style="background: linear-gradient(135deg, #EEF2FF 60%, #2563EB 100%);">
+            <div>
+                <h2 class="fw-bold mb-2" style="font-size:2.2rem;">Welcome Back, {{Auth::user()->name  }} 👋</h2>
+                <p class="text-muted mb-0" style="font-size:1.1rem;">Manage quizzes, users, and analytics from your
+                    premium dashboard.</p>
+            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Admin Icon"
+                style="width:80px;height:80px;">
+        </div>
 
-.sidebar h4{
-    color:#fff;
-    font-weight:600;
-}
-
-.sidebar a{
-    display:block;
-    color:#CBD5E1;
-    padding:12px;
-    margin-top:10px;
-    text-decoration:none;
-    border-radius:8px;
-    transition:0.3s;
-}
-
-.sidebar a:hover{
-    background:#2563EB;
-    color:#fff;
-}
-
-/* Content */
-.main-content{
-    margin-left:260px;
-    padding:40px;
-}
-
-/* Bulky Header */
-.admin-header{
-    background:#fff;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 20px 60px rgba(0,0,0,0.08);
-    margin-bottom:30px;
-}
-
-.stat-card{
-    background:#fff;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.05);
-}
-
-.logout-btn{
-    background:#1c3bb9;
-    color:#fff !important;
-    text-align:center;
-    margin-top:20px;
-}
-
-.logout-btn:hover{
-    background:#B91C1C;
-}
-.logout-button{
-    margin-top: 13rem;
-}
-
-</style>
-</head>
-<body>
-
-<!-- Sidebar -->
-<div class="sidebar">
-    <h4>HiStudy Admin</h4>
-    <a href="admin-dashboard.html">Dashboard</a>
-    <a href="create-quiz.html">Create Quiz</a>
-    <a href="add-questions.html">Add Questions</a>
-    <a href="users.html">View Users</a>
-    <a href="results.html">View Results</a>
-    <a href="analytics.html">Analytics</a>
-       <!-- Logout at Bottom -->
-    <div class="logout-button">
-        <a href="admin-login.html" class="logout-btn">
-             Logout
-        </a>
-    </div>
-
-</div>
-
-<!-- Main Content -->
-<div class="main-content">
-
-    <div class="admin-header">
-        <h3>Welcome Back, Admin 👋</h3>
-        <p class="text-muted">Manage quizzes, users, and analytics from here.</p>
-    </div>
-
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="stat-card">
-                <h5>Total Quizzes</h5>
-                <h3>15</h3>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="stat-card text-center shadow-lg border-0"
+                    style="background: linear-gradient(135deg, #F8FAFF 80%, #2563EB 20%);">
+                    <div class="mb-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Quiz Icon"
+                            style="width:40px;height:40px;">
+                    </div>
+                    <h5 class="fw-semibold">Total Quizzes</h5>
+                    <h2 class="fw-bold text-primary" style="font-size:2rem;">{{ $total_quiz }}</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card text-center shadow-lg border-0"
+                    style="background: linear-gradient(135deg, #F8FAFF 80%, #1E3A8A 20%);">
+                    <div class="mb-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="User Icon"
+                            style="width:40px;height:40px;">
+                    </div>
+                    <h5 class="fw-semibold">Total Users</h5>
+                    <h2 class="fw-bold text-success" style="font-size:2rem;">{{ $totalUsers ?? 0 }}</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card text-center shadow-lg border-0"
+                    style="background: linear-gradient(135deg, #F8FAFF 80%, #EF4444 20%);">
+                    <div class="mb-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Attempts Icon"
+                            style="width:40px;height:40px;">
+                    </div>
+                    <h5 class="fw-semibold">Total Attempts</h5>
+                    <h2 class="fw-bold text-danger" style="font-size:2rem;">{{ $totalAttempts ?? 0 }}</h2>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="stat-card">
-                <h5>Total Users</h5>
-                <h3>120</h3>
+        <div class="row g-4">
+            <div class="col-md-8">
+                <div class="stat-card shadow-lg border-0 p-4" style="min-height:220px;">
+                    <h5 class="fw-semibold mb-3">Recent Activity</h5>
+                    <ul class="list-group">
+                        @foreach ($recentActivities ?? [] as $activity)
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>{{ $activity['description'] }}</span>
+                                <span class="badge bg-primary rounded-pill">{{ $activity['time'] }}</span>
+                            </li>
+                        @endforeach
+                        @if (empty($recentActivities))
+                            <li class="list-group-item text-muted">No recent activity.</li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card shadow-lg border-0 p-4 d-flex flex-column align-items-center justify-content-center"
+                    style="min-height:220px;">
+                    <h5 class="fw-semibold mb-3">Quick Actions</h5>
+                    <a href="{{ route('admin.dashboard.quiz') }}" class="btn btn-primary mb-2 w-100">Create New Quiz</a>
+                    <a href="{{ route('admin.dashboard.question') }}" class="btn btn-outline-primary mb-2 w-100">Add
+                        Question</a>
+                    <a href="{{ route('admin.dashboard.analytics') }}" class="btn btn-outline-success w-100">View
+                        Analytics</a>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="stat-card">
-                <h5>Total Attempts</h5>
-                <h3>560</h3>
-            </div>
-        </div>
     </div>
 
-</div>
 
-</body>
-</html>
+</x-dashboard.main>

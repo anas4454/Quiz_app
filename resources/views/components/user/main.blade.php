@@ -168,6 +168,12 @@
         .profile-link {
             color: #E2E8F0;
         }
+
+        .quiz-card{
+            /* border: 2px solid black; */
+            box-shadow: 5px 5px 5px rgb(224, 220, 220);
+            border-radius: .7rem;
+        }
     </style>
 </head>
 
@@ -191,7 +197,7 @@
 
                 <!-- Center Links -->
                 <ul class="navbar-nav mx-auto gap-4">
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link active" href="{{ route('user-dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
@@ -199,7 +205,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user-result') }}">Results</a>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 <!-- Right Side -->
@@ -212,22 +218,27 @@
                     </div>
 
 
-                    <a href="{{ route('login') }}">
-                        <button class="border-0 shadow-lg rounded-2 p-2">Login</button>
-                    </a>
-                    <!-- Profile -->
-
-                    {{-- <div class="dropdown">
-                        <a class="profile-link dropdown-toggle" href="{{ route('user-profile') }}" role="button" data-bs-toggle="dropdown">
-
-                            <span>Anas</span>
+                    @if(Auth::check())
+                        <div class="dropdown">
+                            <a class="profile-link dropdown-toggle" href="{{ route('user-profile') }}" role="button" data-bs-toggle="dropdown">
+                                <span>{{ Auth::user()->name }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4">
+                                <li><a class="dropdown-item" href="{{ route('user-profile') }}">Profile</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}">
+                            <button class="border-0 shadow-lg rounded-2 p-2">Login</button>
                         </a>
+                    @endif
 
-                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4">
-                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
-                            <li><a class="dropdown-item text-danger" href="login.html">Logout</a></li>
-                        </ul>
-                    </div> --}}
 
                 </div>
 

@@ -2,65 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Option;
-use App\Http\Requests\StoreOptionRequest;
-use App\Http\Requests\UpdateOptionRequest;
+use App\Models\Quiz;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class OptionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function option()
     {
-        //
+        return view('dashboard-pages.create-quiz');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function createQuiz(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'title'=>['required' , 'string'],
+            'description'=>['required' , 'string'],
+            'question'=>['required' , 'integer'],
+            'minutes'=>['required' , 'integer'],
+            'stage'=>['required' , 'string'],
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreOptionRequest $request)
-    {
-        //
-    }
+        Quiz::create([
+            "title" => $request->title ,
+            "slug" => Str::slug($request->title) ,
+            "description"=>$request->description,
+            "question"=>$request->question,
+            "minutes"=>$request->minutes,
+            "stage"=>$request->stage,
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Option $option)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Option $option)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateOptionRequest $request, Option $option)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Option $option)
-    {
-        //
+        return redirect()->back()->with('message' , 'You successfully added the Question.');
     }
 }

@@ -17,7 +17,9 @@ class ResultFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "quiz_id" => $this->faker->numberBetween(1, 10),
+            "score" => $this->faker->numberBetween(0, 100),
+            "question" => $this->faker->numberBetween(1, 20),
         ];
     }
 }

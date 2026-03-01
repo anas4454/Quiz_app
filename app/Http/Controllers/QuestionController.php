@@ -2,65 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Test;
+use App\Models\Option;
 use App\Models\Question;
-use App\Http\Requests\StoreQuestionRequest;
-use App\Http\Requests\UpdateQuestionRequest;
+use App\Models\Quiz;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function sendEmail()
     {
-        //
+
+        Mail::to('anasch14g@gmail.com')->send(new Test);
+
+        return 'Email Sent';
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function question()
     {
-        //
+
+        $quizzes = Quiz::all();
+
+        return view('dashboard-pages.add-question', compact('quizzes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreQuestionRequest $request)
+    public function addQuestion(Request $request)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Question $question)
-    {
-        //
-    }
+        $request->validate([
+            'quiz_id' => 'required',
+            'question_text' => 'required',
+            'options' => ['required' , 'array' , 'size:4'],
+            'correct_answer' =>  ['required' , 'integer' , 'min:1' , 'max:4'],
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Question $question)
-    {
-        //
-    }
+        $question = Question::create([
+            'quiz_id' => $request->quiz_id,
+            'question_text' => $request->question_text,
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateQuestionRequest $request, Question $question)
-    {
-        //
-    }
+        foreach($request->options as $index => $singleOption)
+        Option::create([
+            'question_id' => $question->id,
+            'option_text' => $singleOption,
+            'is_correct' =>( $request->correct_answer == $index+1),
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Question $question)
-    {
-        //
+        return redirect()->back()->with('message', 'question was created successfully.');
     }
 }

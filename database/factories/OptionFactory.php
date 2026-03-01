@@ -17,7 +17,8 @@ class OptionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'option_text' => $this->faker->word(),
+            'is_correct' => false,
         ];
     }
 }

@@ -3,7 +3,7 @@
     <html>
 
     <head>
-        <title>Create Quiz - HiStudy Admin</title>
+        <title>Quiz Results - HiStudy Admin</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
@@ -81,41 +81,31 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="admin-header">
-                <h3>Create New Quiz</h3>
+                <h3>Quiz Results</h3>
             </div>
             <div class="stat-card">
-                <form method="POST" action="{{ route('admin.dashboard.quiz-create') }}">
-                    @csrf
-                    <div class="mb-3">
-                        <label class="form-label">Quiz Title</label>
-                        <input type="text" name="title" class="form-control" placeholder="Quiz Title" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <textarea name="description" class="form-control" placeholder="Quiz Description" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Number of Questions</label>
-                        <input type="number" name="question" class="form-control" placeholder="Number of Questions"
-                            min="1" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Set Timer (minutes)</label>
-                        <input type="number" name="minutes" class="form-control" placeholder="Set Timer (minutes)"
-                            min="1" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Stage</label>
-                        <select name="stage" class="form-control" required>
-                            <option value="">Select Stage</option>
-                            <option value="basic">Basic</option>
-                            <option value="intermediate">Intermediate</option>
-                            <option value="popular">Popular</option>
-                            <option value="advance">Advance</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Create Quiz</button>
-                </form>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Quiz</th>
+                            <th>Score</th>
+                            <th>Questions</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{-- @foreach ($results as $result)
+                        <tr>
+                            <td>{{ $result->user->name ?? '-' }}</td>
+                            <td>{{ $result->quiz->title ?? '-' }}</td>
+                            <td>{{ $result->score }}</td>
+                            <td>{{ $result->question }}</td>
+                            <td>{{ $result->created_at->format('Y-m-d') }}</td>
+                        </tr>
+                    @endforeach --}}
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
