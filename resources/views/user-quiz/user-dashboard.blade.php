@@ -3,7 +3,11 @@
 
     <div class="container mt-5">
 
-        <h2 class="mb-4">Welcome Back, {{auth()::user()->name  }} 👋</h2>
+        @auth
+            <h2>Welcome Back, {{ auth()->user()->name }} 👋</h2>
+        @else
+            <h2>Welcome Guest 👋</h2>
+        @endauth
 
         <div class="row g-4">
             <div class="col-md-4">
@@ -33,24 +37,25 @@
 
                 <!-- Quiz 1 -->
 
-                    @if ($quiz->isNotEmpty())
+                @if ($quiz->isNotEmpty())
 
-                        @foreach ($quiz as $item)
-                            <div class="col-md-6">
-                                <div class="quiz-card p-4">
-                                    <h5>{{ $item->title }}</h5>
-                                    <p class="text-muted">{{ $item->question }} Questions • {{ $item->minutes }} Minutes
-                                    </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span
-                                            class="badge text-dark @if ($item->stage == 'basic') bg-primary @elseif ($item->stage == 'intermediate') bg-warning  @elseif ($item->stage == 'popular') bg-success  @elseif ($item->stage == 'advanced') bg-danger @endif ">{{ $item->stage }}</span>
-                                        <a href="{{ route('user-quiz-start' , $item->slug) }}" class="btn btn-sm btn-primary">Start</a>
-                                    </div>
+                    @foreach ($quiz as $item)
+                        <div class="col-md-6">
+                            <div class="quiz-card p-4">
+                                <h5>{{ $item->title }}</h5>
+                                <p class="text-muted">{{ $item->question }} Questions • {{ $item->minutes }} Minutes
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span
+                                        class="badge text-dark @if ($item->stage == 'basic') bg-primary @elseif ($item->stage == 'intermediate') bg-warning  @elseif ($item->stage == 'popular') bg-success  @elseif ($item->stage == 'advanced') bg-danger @endif ">{{ $item->stage }}</span>
+                                    <a href="{{ route('user-quiz-start', $item->slug) }}"
+                                        class="btn btn-sm btn-primary">Start</a>
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
+                    @endforeach
 
-                    @endif
+                @endif
 
 
 

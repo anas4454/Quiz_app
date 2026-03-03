@@ -5,6 +5,7 @@ use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\ResultController;
 use App\Http\Middleware\Admin_check;
 use App\Http\Middleware\User_check;
 use Illuminate\Support\Facades\Route;
@@ -23,9 +24,10 @@ Route::middleware('auth', 'verified', User_check::class)->group(function () {
 
     Route::post('/quiz/{quiz:slug}/submit', [QuizController::class, 'submit'])->name('user-result');
 
-    // Route::get('/result', [QuizController::class, 'result'])->name('user-result');
-    // Route::post('/result', [QuizController::class, 'result'])->name('user-result');
     Route::get('/userprofile', [QuizController::class, 'profile'])->name('user-profile');
+
+
+    Route::get('/updatePassword', [ResultController::class, 'updatePassword'])->name('new-password');
 
 });
 
@@ -46,6 +48,8 @@ Route::prefix('dashboard')->middleware('auth', 'verified', Admin_check::class)->
 
     Route::get('/user', [AdminController::class, 'users'])->name('admin.dashboard.user');
     Route::get('/view-result', [AdminController::class, 'result'])->name('admin.dashboard.result');
+
+
 
 });
 

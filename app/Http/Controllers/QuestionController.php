@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Mail;
 
 class QuestionController extends Controller
 {
-    public function sendEmail()
-    {
+    // public function sendEmail()
+    // {
 
-        Mail::to('anasch14g@gmail.com')->send(new Test);
+    //     Mail::to('anasch14g@gmail.com')->send(new Test);
 
-        return 'Email Sent';
+    //     return 'Email Sent';
 
-    }
+    // }
 
     public function question()
     {

@@ -22,7 +22,7 @@ class QuizFactory extends Factory
             'description' => $this->faker->paragraph(),
             'question' => $this->faker->numberBetween(1, 20),
             'minutes' => $this->faker->numberBetween(1, 60),
-            'stage' => $this->faker->randomElement(['basic', 'intermediate' , 'popular', 'advanced']),
+            'stage' => $this->faker->randomElement(['basic', 'intermediate' , 'popular', 'advance']),
         ];
     }
 }

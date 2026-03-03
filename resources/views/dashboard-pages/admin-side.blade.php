@@ -7,7 +7,7 @@
         <div class="admin-header d-flex align-items-center justify-content-between mb-5"
             style="background: linear-gradient(135deg, #EEF2FF 60%, #2563EB 100%);">
             <div>
-                <h2 class="fw-bold mb-2" style="font-size:2.2rem;">Welcome Back, {{auth()::user()->name  }} 👋</h2>
+                <h2 class="fw-bold mb-2" style="font-size:2.2rem;">Welcome Back, {{Auth::user()->name  }} 👋</h2>
                 <p class="text-muted mb-0" style="font-size:1.1rem;">Manage quizzes, users, and analytics from your
                     premium dashboard.</p>
             </div>
@@ -35,7 +35,7 @@
                             style="width:40px;height:40px;">
                     </div>
                     <h5 class="fw-semibold">Total Users</h5>
-                    <h2 class="fw-bold text-success" style="font-size:2rem;">{{ $totalUsers ?? 0 }}</h2>
+                    <h2 class="fw-bold text-success" style="font-size:2rem;"> {{Auth::user()->count()  }}</h2>
                 </div>
             </div>
             <div class="col-md-4">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
+use App\Models\Result;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -15,12 +17,16 @@ class AdminController extends Controller
 
     public function users()
     {
-        return view('dashboard-pages.view-users');
+        $users = User::all();
+
+        return view('dashboard-pages.view-users' , compact('users'));
     }
 
     public function result()
     {
-        return view('dashboard-pages.view-result');
+        $results = Result::with(['user', 'quiz'])->get();
+
+        return view('dashboard-pages.view-result' , compact('results'));
     }
 
     public function analytics()

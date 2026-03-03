@@ -95,7 +95,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($results as $result)
+                        @foreach ($results as $result)
                         <tr>
                             <td>{{ $result->user->name ?? '-' }}</td>
                             <td>{{ $result->quiz->title ?? '-' }}</td>
@@ -103,7 +103,7 @@
                             <td>{{ $result->question }}</td>
                             <td>{{ $result->created_at->format('Y-m-d') }}</td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                     </tbody>
                 </table>
             </div>

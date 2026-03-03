@@ -16,9 +16,15 @@ class Test extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
-    {
 
+    public $score;
+    public $totalQuestion;
+
+
+    public function __construct($score ,  $totalQuestion)
+    {
+    $this->score = $score;
+    $this->totalQuestion = $totalQuestion;
     }
 
     /**
@@ -37,7 +43,7 @@ class Test extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.reaultmail',
+            view: 'mail.resultmail',
         );
     }
 

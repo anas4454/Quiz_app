@@ -93,14 +93,17 @@ body{
             <!-- Left Column -->
             <div class="col-md-4 text-center">
                 <img src="https://i.pravatar.cc/200" class="profile-avatar mb-3">
-                <h4>Anas Khan</h4>
-                <p class="text-muted">anas@email.com</p>
+                <h4>{{ Auth::user()->name }}</h4>
+                <p class="text-muted">{{ Auth::user()->email }}</p>
                 <button class="btn btn-outline-secondary btn-sm mt-2">
                     Change Avatar
                 </button>
             </div>
 
             <!-- Right Column -->
+
+            <form action="{{ route('new-password') }}" action="post">
+                @csrf
             <div class="col-md-8">
 
                 <h5 class="mb-3">Account Information</h5>
@@ -109,12 +112,12 @@ body{
 
                     <div class="col-md-6">
                         <label class="form-label">Full Name</label>
-                        <input type="text" class="form-control" value="Anas Khan">
+                        <input type="text" class="form-control" value="{{  Auth::user()->name }}">
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" value="anas@email.com">
+                        <input type="email" class="form-control" value="{{  Auth::user()->email  }}">
                     </div>
 
                     <div class="col-md-6">
@@ -124,7 +127,7 @@ body{
 
                     <div class="col-md-6">
                         <label class="form-label">Joined Date</label>
-                        <input type="text" class="form-control" value="Jan 2026" disabled>
+                        <input type="text" class="form-control" value="{{  Auth::user()->created_at  }}" disabled>
                     </div>
 
                 </div>
@@ -151,6 +154,8 @@ body{
 
             </div>
         </div>
+
+        </form>
 
         <!-- Statistics Section -->
         <hr class="my-5">

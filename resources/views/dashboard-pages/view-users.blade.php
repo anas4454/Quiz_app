@@ -90,18 +90,18 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Total Attempts</th>
+                            {{-- <th>Total Attempts</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($users as $user)
+                        @foreach ($users as $user)
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->role == '0' ? 'Admin' : 'User' }}</td>
-                            <td>{{ $user->attempts ?? 0 }}</td>
-                        </tr> --}}
-                        {{-- @endforeach --}}
+                            {{-- <td>{{ $user->attempts ?? 0 }}</td> --}}
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
